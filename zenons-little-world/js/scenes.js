@@ -15,26 +15,6 @@ function nick() {
   return getNickname();
 }
 
-export async function runIntro() {
-  setMood(Mood.HAPPY);
-  ui.setBg("assets/bg/party.png");
-  ui.clearActors();
-  ui.confetti(true);
-  ui.showHud(false);
-  ui.showDock(false);
-  ui.makeChibi("sacha", { emoji: "🎉" });
-
-  await ui.say([
-    { speaker: "Sacha", text: `Happy birthday, ${nick()}!` },
-    { speaker: "Sacha", text: "Welcome home, surfboard." },
-    { speaker: "Sacha", text: "*giggles* …what? You wanted to ride." },
-    { speaker: "Sacha", text: "This is your little world. Don't break it. Or do. I'll punish you either way." },
-  ]);
-
-  state.flags.introDone = true;
-  await enterHub({ first: true });
-}
-
 export async function enterHub({ first = false } = {}) {
   state.scene = "hub";
   if (first) setMood(Mood.OK);
@@ -166,7 +146,7 @@ async function onCrown() {
   sfx.reveal();
   await ui.say([
     { speaker: "Sacha", text: "My angel. Put it on." },
-    { speaker: "Zenon", text: "*puts crown on wrong* I am majesty. I am also nervous." },
+    { speaker: "Zenon", text: "*puts the crown on wrong* You make me so nervous. Stop looking at me." },
   ]);
 }
 
@@ -277,7 +257,14 @@ async function runCoffee() {
     await rewardScene();
   } else {
     sfx.splash();
-    ui.flashFx("splash", "💦");
+    ui.flashFx("splash", "☕");
+    setMood(Mood.MAD);
+    addBattery(5); // still charges a little; fail is funny not punishing progress forever
+    ui.refreshHud();
+    const z = document.querySelector(".chibi.zenon");
+    if (z) z.classList.add("drenched");
+    ui.updateFaces();
+    ui.popEmoji("☕", 62, 38);
     setMood(Mood.MAD);
     addBattery(5); // still charges a little; fail is funny not punishing progress forever
     ui.refreshHud();
@@ -405,10 +392,10 @@ async function runWorship() {
   ]);
 
   const tone = await ui.say(
-    [{ speaker: "Sacha", text: "Pick your Sacha." }],
+    [{ speaker: "Sacha", text: "How do you want me." }],
     [
-      { label: "Soft — praise him", value: "soft", primary: true },
-      { label: "Mean — make him stumble", value: "mean" },
+      { label: "Soft. Praise me.", value: "soft", primary: true },
+      { label: "Mean. Make me stumble.", value: "mean" },
     ]
   );
 

@@ -2,7 +2,6 @@ import { state, saveNickname, getNickname, setMood, Mood } from "./state.js";
 import { unlockAudio, sfx } from "./audio.js";
 import { ui } from "./ui.js";
 import {
-  runIntro,
   enterHub,
   onKiss,
   onFeedCat,
@@ -35,7 +34,6 @@ async function boot() {
   ui.makeChibi("sacha", { emoji: "🎂" });
 
   await ui.say([
-    { speaker: "Player", text: "Zenon's Little World" },
     { speaker: "Player", text: "A tiny birthday simulation. Tap to continue." },
   ]);
 
@@ -63,7 +61,7 @@ async function boot() {
     }
   });
 
-  await runIntro();
+  await enterHub({ first: true });
 }
 
 boot().catch((err) => {
