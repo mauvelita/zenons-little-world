@@ -5,7 +5,7 @@ function nick() {
 async function enterHub({ first = false } = {}) {
   state.scene = "hub";
   if (first) setMood(Mood.OK);
-  ui.setBg("assets/bg/hub.png");
+  ui.setBg("assets/bg/hub.jpeg");
   ui.clearActors();
   ui.confetti(!!first);
   if (!first) ui.confetti(false);
@@ -17,9 +17,9 @@ async function enterHub({ first = false } = {}) {
   ui.showDock(true);
 
   ui.addProp("shrine", "assets/shrine/shrine-poster.jpg", () => onShrine());
-  ui.addProp("spidey", "assets/props/spidey-poster.png", () => onSpidey());
-  ui.addProp("cup", "assets/props/iced-capp.png", () => onCappProp());
-  ui.addProp("halo", "assets/props/crown.png", () => onHalo());
+  ui.addProp("spidey", "assets/props/spidey-poster.jpeg", () => onSpidey());
+  ui.addProp("cup", "assets/props/iced-capp.jpeg", () => onCappProp());
+  ui.addProp("halo", "assets/props/crown.jpeg", () => onHalo());
   ui.addCat(() => onFeedCat());
 
   ui.makeChibi("sacha", { emoji: moodEmoji() });
@@ -207,7 +207,7 @@ async function openChallenges() {
 async function runCoffee() {
   state.scene = "office";
   ui.showDock(false);
-  ui.setBg("assets/bg/office.png");
+  ui.setBg("assets/bg/office.jpeg");
   ui.clearActors();
   ui.confetti(false);
   ui.makeChibi("sacha", { emoji: "☕" });
@@ -361,7 +361,7 @@ async function runWorship() {
   state.scene = "worship";
   setMood(Mood.OK);
   ui.showDock(false);
-  ui.setBg("assets/bg/hub.png");
+  ui.setBg("assets/bg/hub.jpeg");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "😈" });
   ui.makeChibi("zenon");
@@ -410,7 +410,7 @@ async function runFinale() {
   setMood(Mood.HAPPY);
   ui.showDock(false);
   ui.confetti(true);
-  ui.setBg("assets/bg/bedroom.png");
+  ui.setBg("assets/bg/bedroom.jpeg");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "❤️" });
   ui.makeChibi("zenon");
