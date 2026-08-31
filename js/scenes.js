@@ -28,7 +28,7 @@ async function enterHub({ first = false } = {}) {
 
   if (first) {
     await ui.say([
-      { speaker: "Zenon", text: "She's… everywhere. Posters. Pearls. Lilies. I'm going to combust." },
+      { speaker: "Zenon", text: "She's… everywhere. Posters. Diamonds and pearls. Lilies. I'm going to combust." },
       { speaker: "Sacha", text: `Battery up, ${nick()}. Kiss me. Serve me. Survive me.` },
     ]);
   }
@@ -99,11 +99,11 @@ async function onShrine() {
   await ui.openModal({
     title: "Sacha Shrine",
     bodyHtml: `<img class="shrine-view" src="assets/shrine/shrine-poster.jpg" alt="I love Sacha shrine" />
-      <p class="hint">He kneels. Leaves a pearl. Then he makes out with the poster like Sacha wasn't just… right there.</p>`,
+      <p class="hint">He kneels. Leaves diamonds and pearls. Then he makes out with the poster like Sacha wasn't just… right there.</p>`,
     actions: [{ label: "I ❤️ Sacha", value: "ok", primary: true }],
   });
   await ui.say([
-    { speaker: "Sacha", text: "Relax. I only said offer a pearl." },
+    { speaker: "Sacha", text: "Relax. I only said diamonds and pearls." },
   ]);
   checkServiceComplete();
   maybeOfferFinale();
@@ -307,14 +307,14 @@ async function runService() {
   ui.showDock(false);
   await ui.say([
     { speaker: "Sacha", text: "Make me an offering." },
-    { speaker: "Sacha", text: "1) Feed the cat  2) Make me coffee  3) A pearl at my shrine." },
+    { speaker: "Sacha", text: "1) Feed the cat  2) Make me coffee  3) Diamonds and pearls at my shrine." },
   ]);
 
   // pearl offering happens here as dedicated step
   const doPearl = await ui.say(
-    [{ speaker: "Player", text: "Place a pearl offering?" }],
+    [{ speaker: "Player", text: "Offer diamonds and pearls?" }],
     [
-      { label: "Offer pearl + lily at shrine", value: "yes", primary: true },
+      { label: "Leave diamonds and pearls + a lily", value: "yes", primary: true },
       { label: "Half-ass it and hope", value: "no" },
     ]
   );
