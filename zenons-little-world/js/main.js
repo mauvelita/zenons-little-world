@@ -1,4 +1,4 @@
-import { state, saveNickname, getNickname } from "./state.js";
+import { state, saveNickname, getNickname, setMood, Mood } from "./state.js";
 import { unlockAudio, sfx } from "./audio.js";
 import { ui } from "./ui.js";
 import {
@@ -21,18 +21,17 @@ async function boot() {
   window.addEventListener("orientationchange", () => setTimeout(fit, 250));
 
   // first gesture unlocks audio
-  const unlockOnce = async () => {
-    await unlockAudio();
-    document.body.removeEventListener("pointerdown", unlockOnce);
-  };
-  document.body.addEventListener("pointerdown", unlockOnce);
+  document.body.addEventListener("pointerdown", () => {
+    unlockAudio();
+  });
 
   ui.showHud(false);
   ui.showDock(false);
   ui.setBg("assets/bg/party.png");
   ui.confetti(true);
   ui.clearActors();
-  ui.makeChibi("sacha", { face: "assets/faces/sacha/happy-circle.png", emoji: "🎂" });
+  setMood(Mood.HAPPY);
+  ui.makeChibi("sacha", { emoji: "🎂" });
 
   await ui.say([
     { speaker: "Player", text: "Zenon's Little World" },

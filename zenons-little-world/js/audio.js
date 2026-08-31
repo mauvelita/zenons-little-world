@@ -1,9 +1,11 @@
-/** Cartoon SFX via Web Audio — no external files required for MVP */
+/** Cartoon SFX via Web Audio. BGM is `assets/audio/track.mp3`. */
 
 let ctx;
 let unlocked = false;
-let bgmNodes = null;
+let bgmAudio = null;
 let bgmOn = false;
+
+const TRACK_URL = new URL("../assets/audio/track.mp3", import.meta.url).href;
 
 function ac() {
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -11,10 +13,12 @@ function ac() {
 }
 
 export async function unlockAudio() {
-  const c = ac();
-  if (c.state === "suspended") await c.resume();
   unlocked = true;
-  if (!bgmOn) startBgm();
+  startBgm();
+  const c = ac();
+  if (c.state === "suspended") {
+    try { await c.resume(); } catch (_) {}
+  }
 }
 
 function tone(freq, dur = 0.12, type = "square", gain = 0.08, slide = 0) {
@@ -87,44 +91,29 @@ export const sfx = {
   },
 };
 
-/** Soft looping pads as placeholder BGM (swap file later) */
+/** Loop `assets/audio/track.mp3` after the first tap. */
 export function startBgm() {
-  if (bgmOn || !unlocked) return;
-  const c = ac();
-  const master = c.createGain();
-  master.gain.value = 0.028;
-  master.connect(c.destination);
-
-  const notes = [196, 246.94, 293.66, 392];
-  const oscs = notes.map((f, i) => {
-    const o = c.createOscillator();
-    const g = c.createGain();
-    o.type = i % 2 ? "sine" : "triangle";
-    o.frequency.value = f;
-    g.gain.value = 0.2;
-    o.connect(g);
-    g.connect(master);
-    o.start();
-    return { o, g };
-  });
-
-  // gentle pulse
-  const lfo = c.createOscillator();
-  const lfoGain = c.createGain();
-  lfo.frequency.value = 0.15;
-  lfoGain.gain.value = 0.01;
-  lfo.connect(lfoGain);
-  lfoGain.connect(master.gain);
-  lfo.start();
-
-  bgmNodes = { master, oscs, lfo };
-  bgmOn = true;
+  if (bgmAudio) {
+    if (bgmAudio.paused) bgmAudio.play().catch(() => {});
+    return;
+  }
+  const audio = new Audio(TRACK_URL);
+  audio.loop = true;
+  audio.volume = 0.45;
+  audio.preload = "auto";
+  bgmAudio = audio;
+  const tryPlay = () => {
+    audio.play()
+      .then(() => { bgmOn = true; })
+      .catch(() => {});
+  };
+  tryPlay();
+  audio.addEventListener("canplaythrough", tryPlay, { once: true });
 }
 
 export function stopBgm() {
-  if (!bgmNodes) return;
-  bgmNodes.oscs.forEach(({ o }) => { try { o.stop(); } catch (_) {} });
-  try { bgmNodes.lfo.stop(); } catch (_) {}
-  bgmNodes = null;
+  if (!bgmAudio) return;
+  bgmAudio.pause();
+  bgmAudio = null;
   bgmOn = false;
 }

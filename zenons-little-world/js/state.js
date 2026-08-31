@@ -2,8 +2,21 @@ const STORAGE_KEY = "zenon_little_world_nick";
 
 export const Mood = {
   HAPPY: "happy",
-  ANNOYED: "annoyed",
-  FREAKY: "freaky",
+  MAD: "mad",
+  OK: "ok",
+};
+
+const FACES = {
+  sacha: {
+    happy: "assets/faces/sacha/happysacha.jpeg",
+    mad: "assets/faces/sacha/madsacha.jpeg",
+    ok: "assets/faces/sacha/oksacha.jpeg",
+  },
+  zenon: {
+    happy: "assets/faces/zenon/happyzenon.jpeg",
+    mad: "assets/faces/zenon/sadzenon.jpeg",
+    ok: "assets/faces/zenon/okzenon.jpeg",
+  },
 };
 
 function readStoredNick() {
@@ -18,7 +31,7 @@ function readStoredNick() {
 export const state = {
   nickname: readStoredNick(),
   battery: 0,
-  mood: Mood.HAPPY,
+  mood: Mood.OK,
   scene: "boot",
   challenges: {
     coffee: false,
@@ -59,13 +72,13 @@ export function setMood(mood) {
 }
 
 export function canFinale() {
-  return state.battery >= 100 && state.mood !== Mood.ANNOYED;
+  return state.battery >= 100 && state.mood !== Mood.MAD;
 }
 
 export function resetRun() {
   const nick = state.nickname;
   state.battery = 0;
-  state.mood = Mood.HAPPY;
+  state.mood = Mood.OK;
   state.challenges = { coffee: false, service: false, worship: false };
   state.serviceSteps = { cat: false, capp: false, pearl: false };
   state.flags = { fedCat: false, shrineKissed: false, introDone: true };
@@ -74,22 +87,15 @@ export function resetRun() {
 }
 
 export function moodEmoji(mood = state.mood) {
-  if (mood === Mood.ANNOYED) return "💢";
-  if (mood === Mood.FREAKY) return "🔥";
-  return "❤️";
+  if (mood === Mood.MAD) return "💢";
+  if (mood === Mood.HAPPY) return "❤️";
+  return "♡";
 }
 
 export function sachaFace() {
-  if (state.mood === Mood.ANNOYED) return "assets/faces/sacha/mean-circle.png";
-  if (state.mood === Mood.FREAKY) return "assets/faces/sacha/pretty-circle.png";
-  // HAPPY — big smile insert
-  return "assets/faces/sacha/happy-circle.png";
+  return FACES.sacha[state.mood] || FACES.sacha.ok;
 }
 
-export function zenonFace(override) {
-  if (override) return `assets/faces/zenon/${override}.png`;
-  if (state.mood === Mood.ANNOYED) return "assets/faces/zenon/ow.png";
-  if (state.mood === Mood.FREAKY) return "assets/faces/zenon/flustered.png";
-  if (state.battery >= 60) return "assets/faces/zenon/happy.png";
-  return "assets/faces/zenon/neutral.png";
+export function zenonFace() {
+  return FACES.zenon[state.mood] || FACES.zenon.ok;
 }

@@ -81,7 +81,7 @@ export const ui = {
     const face = document.createElement("img");
     face.className = "face";
     face.alt = who;
-    face.src = who === "sacha" ? (opts.face || sachaFace()) : (opts.face || zenonFace(opts.zenonMood));
+    face.src = who === "sacha" ? (opts.face || sachaFace()) : (opts.face || zenonFace());
     const body = document.createElement("div");
     body.className = "body";
     const legs = document.createElement("div");
@@ -109,8 +109,8 @@ export const ui = {
     if (tag) tag.textContent = moodEmoji();
     const zen = this.el.actors.querySelector(".chibi.zenon");
     if (zen) {
-      zen.classList.toggle("bounce", state.mood === "happy" && state.battery >= 40);
-      zen.classList.toggle("timeout", state.mood === "annoyed");
+      zen.classList.toggle("bounce", state.mood === "happy");
+      zen.classList.toggle("timeout", state.mood === "mad");
     }
   },
 

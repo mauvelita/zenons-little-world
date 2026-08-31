@@ -16,12 +16,13 @@ function nick() {
 }
 
 export async function runIntro() {
+  setMood(Mood.HAPPY);
   ui.setBg("assets/bg/party.png");
   ui.clearActors();
   ui.confetti(true);
   ui.showHud(false);
   ui.showDock(false);
-  ui.makeChibi("sacha", { face: "assets/faces/sacha/happy-circle.png", emoji: "🎉" });
+  ui.makeChibi("sacha", { emoji: "🎉" });
 
   await ui.say([
     { speaker: "Sacha", text: `Happy birthday, ${nick()}!` },
@@ -36,6 +37,7 @@ export async function runIntro() {
 
 export async function enterHub({ first = false } = {}) {
   state.scene = "hub";
+  if (first) setMood(Mood.OK);
   ui.setBg("assets/bg/hub.png");
   ui.clearActors();
   ui.confetti(!!first);
@@ -85,9 +87,7 @@ export async function onKiss() {
   ui.flashFx("hearts", "💋");
   ui.popEmoji("❤️", 55, 35);
   addBattery(8);
-  if (state.mood === Mood.ANNOYED) setMood(Mood.HAPPY);
-  else if (Math.random() > 0.6) setMood(Mood.FREAKY);
-  else setMood(Mood.HAPPY);
+  setMood(Mood.HAPPY);
   ui.refreshHud();
   ui.updateFaces();
   const zen = document.querySelector(".chibi.zenon");
@@ -96,7 +96,7 @@ export async function onKiss() {
     setTimeout(() => zen.classList.remove("bounce"), 900);
   }
   await ui.say([
-    { speaker: "Sacha", text: state.mood === Mood.FREAKY ? "Mm. Harder next time." : "Good boy." },
+    { speaker: "Sacha", text: "Good boy." },
     { speaker: "Zenon", text: "I— yes. Battery… charging. Brain… gone." },
   ]);
   maybeOfferFinale();
@@ -126,7 +126,7 @@ async function onShrine() {
   state.flags.shrineKissed = true;
   state.serviceSteps.pearl = true;
   addBattery(5);
-  setMood(Mood.FREAKY);
+  setMood(Mood.HAPPY);
   ui.refreshHud();
   ui.updateFaces();
   await ui.openModal({
@@ -209,7 +209,7 @@ export async function onChomp() {
   ui.flashFx("", "🦷");
   ui.popEmoji("💢", 50, 40);
   addBattery(6);
-  setMood(Mood.FREAKY);
+  setMood(Mood.MAD);
   ui.refreshHud();
   ui.updateFaces();
   await ui.say([
@@ -280,7 +280,7 @@ async function runCoffee() {
   } else {
     sfx.splash();
     ui.flashFx("splash", "💦");
-    setMood(Mood.ANNOYED);
+    setMood(Mood.MAD);
     addBattery(5); // still charges a little; fail is funny not punishing progress forever
     ui.refreshHud();
     const z = document.querySelector(".chibi.zenon");
@@ -303,7 +303,7 @@ async function punishRewardScene() {
   ui.showDock(false);
   const z = document.querySelector(".chibi.zenon");
   if (z) z.classList.add("kneel", "timeout");
-  setMood(Mood.ANNOYED);
+  setMood(Mood.MAD);
   ui.updateFaces();
   await ui.say([
     { speaker: "Zenon", text: "Please. Mercy. I'll do better. I'll—" },
@@ -315,7 +315,7 @@ async function punishRewardScene() {
   await ui.say([{ speaker: "Zenon", text: "ow:(" }]);
   sfx.kiss();
   ui.flashFx("hearts", "💋");
-  setMood(Mood.FREAKY);
+  setMood(Mood.HAPPY);
   addBattery(10);
   ui.refreshHud();
   if (z) z.classList.remove("kneel", "timeout", "drenched");
@@ -359,7 +359,7 @@ async function runService() {
     addBattery(8);
     ui.refreshHud();
   } else {
-    setMood(Mood.ANNOYED);
+    setMood(Mood.MAD);
     ui.refreshHud();
     ui.updateFaces();
     document.querySelector(".chibi.zenon")?.classList.add("timeout");
@@ -394,11 +394,12 @@ async function runService() {
 
 async function runWorship() {
   state.scene = "worship";
+  setMood(Mood.OK);
   ui.showDock(false);
   ui.setBg("assets/bg/hub.png");
   ui.clearActors();
-  ui.makeChibi("sacha", { face: "assets/faces/sacha/pretty-circle.png", emoji: "😈" });
-  ui.makeChibi("zenon", { zenonMood: "flustered" });
+  ui.makeChibi("sacha", { emoji: "😈" });
+  ui.makeChibi("zenon");
 
   await ui.say([
     { speaker: "Sacha", text: `Look at me, ${nick()}.` },
@@ -417,6 +418,7 @@ async function runWorship() {
     setMood(Mood.HAPPY);
     addBattery(18);
     ui.refreshHud();
+    ui.updateFaces();
     document.querySelector(".chibi.zenon")?.classList.add("bounce");
     await ui.say([
       { speaker: "Sacha", text: "You're doing so well. My devoted little CEO." },
@@ -424,7 +426,7 @@ async function runWorship() {
     ]);
     await rewardScene();
   } else {
-    setMood(Mood.FREAKY);
+    setMood(Mood.MAD);
     ui.updateFaces();
     await ui.say([
       { speaker: "Sacha", text: "On your knees. Use your words." },
@@ -440,12 +442,13 @@ async function runWorship() {
 
 export async function runFinale() {
   state.scene = "bedroom";
+  setMood(Mood.HAPPY);
   ui.showDock(false);
   ui.confetti(true);
   ui.setBg("assets/bg/bedroom.png");
   ui.clearActors();
-  ui.makeChibi("sacha", { face: "assets/faces/sacha/happy-circle.png", emoji: "❤️" });
-  ui.makeChibi("zenon", { zenonMood: "happy" });
+  ui.makeChibi("sacha", { emoji: "❤️" });
+  ui.makeChibi("zenon");
   ui.showHud(true);
 
   await ui.say([
