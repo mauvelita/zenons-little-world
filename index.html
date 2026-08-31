@@ -2,12 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=./zenons-little-world/" />
-  <link rel="canonical" href="./zenons-little-world/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#142018" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Zenon's Little World</title>
-  <script>location.replace("./zenons-little-world/");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <p><a href="./zenons-little-world/">Play Zenon's Little World</a></p>
+  <div id="app">
+    <div id="phone" class="phone">
+      <!-- meters -->
+      <header id="hud" class="hud hidden">
+        <div class="meter">
+          <span class="meter-label">Battery</span>
+          <div class="meter-bar"><div id="battery-fill" class="meter-fill battery"></div></div>
+          <span id="battery-pct" class="meter-pct">0%</span>
+        </div>
+        <div class="mood-chip">
+          <span>Sacha</span>
+          <span id="mood-emoji" class="mood-emoji">♡</span>
+        </div>
+      </header>
+
+      <!-- scene stage -->
+      <main id="stage" class="stage">
+        <div id="bg" class="bg"></div>
+        <div id="confetti" class="confetti hidden" aria-hidden="true"></div>
+        <div id="actors" class="actors"></div>
+        <div id="emoji-pop" class="emoji-pop" aria-hidden="true"></div>
+        <div id="hotspots" class="hotspots"></div>
+      </main>
+
+      <!-- dialogue -->
+      <section id="dialogue" class="dialogue hidden">
+        <div class="bubble-wrap">
+          <p id="speaker" class="speaker"></p>
+          <p id="bubble-text" class="bubble-text"></p>
+        </div>
+        <div id="choices" class="choices"></div>
+        <button id="btn-next" class="btn-next" type="button">Tap</button>
+      </section>
+
+      <!-- action dock -->
+      <nav id="dock" class="dock hidden">
+        <button type="button" data-action="kiss">💋 Kiss</button>
+        <button type="button" data-action="feed">🐱 Feed</button>
+        <button type="button" data-action="chomp">🦷 Chomp</button>
+        <button type="button" data-action="challenges">✦ Go</button>
+      </nav>
+
+      <!-- modal overlays -->
+      <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card">
+          <h2 id="modal-title"></h2>
+          <div id="modal-body"></div>
+          <div id="modal-actions" class="modal-actions"></div>
+        </div>
+      </div>
+
+      <!-- name gate -->
+      <div id="name-gate" class="modal hidden">
+        <div class="modal-card">
+          <h2>What should Sacha call you?</h2>
+          <p class="hint">Any nickname — saved for next visits.</p>
+          <input id="nickname-input" type="text" maxlength="24" placeholder="e.g. big daddy" autocomplete="off" />
+          <div class="modal-actions">
+            <button type="button" id="btn-save-name" class="btn primary">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- flash fx -->
+      <div id="fx" class="fx hidden"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
