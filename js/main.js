@@ -24,7 +24,7 @@ async function boot() {
   ui.makeChibi("sacha", { emoji: "🎂" });
 
   await ui.say([
-    { speaker: "Sacha", text: "A tiny birthday simulation. Tap to continue." },
+    { speaker: "Sacha", text: "Come in. It's yours. Tap." },
   ]);
 
   const name = await ui.askName();
