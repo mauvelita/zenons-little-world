@@ -119,28 +119,26 @@ async function onSpidey() {
 
 async function onCappProp() {
   sfx.click();
-  state.serviceSteps.capp = true;
   addBattery(3);
   ui.refreshHud();
   await ui.say([
     { speaker: "Zenon", text: "Tim Hortons iced capp. Sacred." },
-    { speaker: "Sacha", text: "Bring that energy to my coffee, CEO." },
+    { speaker: "Sacha", text: "Cute. Now make me coffee. Office. Go." },
   ]);
-  checkServiceComplete();
 }
 
 async function onHalo() {
   sfx.reveal();
   await ui.say([
     { speaker: "Sacha", text: "My angel. Put it on." },
-    { speaker: "Zenon", text: "*puts the halo on wrong* You make me so nervous. Stop looking at me." },
+    { speaker: "Zenon", text: "*puts it on. nervous laugh* Stop looking at me!!!" },
   ]);
 }
 
 function checkServiceComplete() {
   // pearl step via challenges menu or shrine pearl
-  const { cat, capp, pearl } = state.serviceSteps;
-  if (cat && capp && pearl && !state.challenges.service) {
+  const { cat, coffee, pearl } = state.serviceSteps;
+  if (cat && coffee && pearl && !state.challenges.service) {
     state.challenges.service = true;
     addBattery(15);
     setMood(Mood.HAPPY);
@@ -190,10 +188,10 @@ async function onChomp() {
 async function openChallenges() {
   const c = state.challenges;
   const pick = await ui.openModal({
-    title: "Pick a setting",
-    bodyHtml: ``,
+    title: "Let's have some fun?",
+    bodyHtml: `<p class="hint">Pick one. Don't make me wait.</p>`,
     actions: [
-      { label: c.coffee ? "Office — Make coffee ✓" : "Office — Make coffee", value: "coffee", primary: !c.coffee, className: c.coffee ? "done" : "" },
+      { label: c.coffee ? "Meet me at the office ✓" : "Meet me at the office", value: "coffee", primary: !c.coffee, className: c.coffee ? "done" : "" },
       { label: c.service ? "Make offerings ✓" : "Make offerings", value: "service", className: c.service ? "done" : "" },
       { label: c.worship ? "Sanctuary ✓" : "Sanctuary", value: "worship", className: c.worship ? "done" : "" },
       { label: canFinale() ? "Bedroom — Final kiss" : "Bedroom (locked)", value: "bedroom", disabled: !canFinale() },
@@ -234,6 +232,7 @@ async function runCoffee() {
     setMood(Mood.HAPPY);
     addBattery(20);
     state.challenges.coffee = true;
+    state.serviceSteps.coffee = true;
     ui.refreshHud();
     ui.updateFaces();
     document.querySelector(".chibi.zenon")?.classList.add("bounce");
@@ -259,6 +258,7 @@ async function runCoffee() {
     ]);
     await punishRewardScene();
     state.challenges.coffee = true;
+    state.serviceSteps.coffee = true;
     addBattery(15);
     ui.refreshHud();
   }
@@ -306,8 +306,8 @@ async function rewardScene() {
 async function runService() {
   ui.showDock(false);
   await ui.say([
-    { speaker: "Sacha", text: "Make offerings. For me." },
-    { speaker: "Sacha", text: "1) Feed the cat  2) Touch the iced capp  3) A pearl at my shrine." },
+    { speaker: "Sacha", text: "Make me an offering." },
+    { speaker: "Sacha", text: "1) Feed the cat  2) Make me coffee  3) A pearl at my shrine." },
   ]);
 
   // pearl offering happens here as dedicated step
@@ -338,18 +338,17 @@ async function runService() {
     addBattery(8);
   }
 
-  // auto-complete cat/capp if they already poked them; else nudge
-  if (!state.serviceSteps.cat || !state.serviceSteps.capp) {
+  if (!state.serviceSteps.cat || !state.serviceSteps.coffee) {
     await ui.say([
       {
         speaker: "Sacha",
-        text: `Still missing: ${[!state.serviceSteps.cat && "feed cat", !state.serviceSteps.capp && "iced capp"].filter(Boolean).join(" + ")}. Tap them in the garden.`,
+        text: `Still missing: ${[!state.serviceSteps.cat && "feed the cat", !state.serviceSteps.coffee && "make me coffee"].filter(Boolean).join(" + ")}.`,
       },
     ]);
   }
 
   checkServiceComplete();
-  if (!state.challenges.service && state.serviceSteps.cat && state.serviceSteps.capp && state.serviceSteps.pearl) {
+  if (!state.challenges.service && state.serviceSteps.cat && state.serviceSteps.coffee && state.serviceSteps.pearl) {
     state.challenges.service = true;
     addBattery(12);
     setMood(Mood.HAPPY);
@@ -424,7 +423,7 @@ async function runFinale() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   await ui.say([
-    { speaker: "Zenon", text: "If you left I'd still be here kissing that poster. I'm not well. I'm yours." },
+    { speaker: "Zenon", text: "If you left I'd still be here kissing that poster. I wanna die. It's too much. I'm yours." },
     { speaker: "Sacha", text: "Good. Stay sick. Come here." },
   ]);
 

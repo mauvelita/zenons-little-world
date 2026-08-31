@@ -40,7 +40,7 @@ const state = {
   },
   serviceSteps: {
     cat: false,
-    capp: false,
+    coffee: false,
     pearl: false,
   },
   flags: {
@@ -80,7 +80,7 @@ function resetRun() {
   state.battery = 0;
   state.mood = Mood.OK;
   state.challenges = { coffee: false, service: false, worship: false };
-  state.serviceSteps = { cat: false, capp: false, pearl: false };
+  state.serviceSteps = { cat: false, coffee: false, pearl: false };
   state.flags = { fedCat: false, shrineKissed: false, introDone: true };
   state.nickname = nick;
   state.scene = "hub";
