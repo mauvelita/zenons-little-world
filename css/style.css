@@ -118,14 +118,11 @@ html, body {
 .bg {
   position: absolute;
   inset: 0;
-  background-color: #3a4f42;
-  background-image:
-    radial-gradient(ellipse at 50% 10%, #6a8a72 0%, transparent 50%),
-    linear-gradient(180deg, #4a6354 0%, #2c3d32 48%, #5a4a38 48%, #3d3228 100%);
+  background-color: #142018;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  image-rendering: auto;
+  image-rendering: pixelated;
   overflow: hidden;
 }
 .bg::after {
@@ -162,9 +159,9 @@ html, body {
   inset: 0;
   z-index: 4;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding-top: 24px;
+  padding-top: 64px;
   padding-bottom: 12px;
   gap: 16px;
   pointer-events: none;
@@ -172,8 +169,8 @@ html, body {
 
 .chibi {
   position: relative;
-  width: 168px;
-  height: 230px;
+  width: 118px;
+  height: 156px;
   flex-shrink: 0;
   overflow: visible;
 }
@@ -242,8 +239,8 @@ html, body {
   z-index: 1;
   left: 50%;
   bottom: 0;
-  width: 100px;
-  height: 118px;
+  width: 72px;
+  height: 84px;
   transform: translateX(-50%);
   transform-origin: center bottom;
   background: #2a2e38;
@@ -276,8 +273,8 @@ html, body {
   z-index: 2;
   left: 50%;
   top: 0;
-  width: 120px;
-  height: 120px;
+  width: 72px;
+  height: 72px;
   transform: translateX(-50%);
   border-radius: 50%;
   border: 3px solid #f2ebe3;
@@ -510,9 +507,9 @@ html, body {
 .end-card p { line-height: 1.4; }
 
 @media (max-height: 700px) {
-  .chibi { width: 140px; height: 190px; }
-  .chibi .face { width: 100px; height: 100px; }
-  .chibi .body { width: 84px; height: 100px; }
+  .chibi { width: 100px; height: 136px; }
+  .chibi .face { width: 64px; height: 64px; }
+  .chibi .body { width: 60px; height: 72px; }
   .bubble-wrap { min-height: 72px; padding: 10px; }
 }
 
@@ -535,16 +532,16 @@ html, body {
     box-shadow: none;
   }
   .chibi {
-    width: min(42vw, 168px);
-    height: min(58vw, 230px);
+    width: min(34vw, 130px);
+    height: min(44vw, 168px);
   }
   .chibi .face {
-    width: min(28vw, 120px);
-    height: min(28vw, 120px);
+    width: min(20vw, 78px);
+    height: min(20vw, 78px);
   }
   .chibi .body {
-    width: min(26vw, 100px);
-    height: min(30vw, 118px);
+    width: min(22vw, 76px);
+    height: min(24vw, 90px);
   }
   .bubble-wrap { min-height: 0; }
 }

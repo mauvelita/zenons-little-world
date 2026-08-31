@@ -5,7 +5,7 @@ function nick() {
 async function enterHub({ first = false } = {}) {
   state.scene = "hub";
   if (first) setMood(Mood.OK);
-  ui.setBg("assets/shrine/sacha-sofa.jpg");
+  ui.setBg("assets/bg/hub.png");
   ui.clearActors();
   ui.confetti(!!first);
   if (!first) ui.confetti(false);
@@ -362,7 +362,7 @@ async function runWorship() {
   state.scene = "worship";
   setMood(Mood.OK);
   ui.showDock(false);
-  ui.setBg("assets/shrine/sacha-sofa.jpg");
+  ui.setBg("assets/bg/hub.png");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "😈" });
   ui.makeChibi("zenon");
@@ -411,7 +411,7 @@ async function runFinale() {
   setMood(Mood.HAPPY);
   ui.showDock(false);
   ui.confetti(true);
-  ui.setBg("assets/shrine/sacha-cozy.jpg");
+  ui.setBg("assets/bg/bedroom.png");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "❤️" });
   ui.makeChibi("zenon");

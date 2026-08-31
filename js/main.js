@@ -17,7 +17,7 @@ async function boot() {
 
   ui.showHud(false);
   ui.showDock(false);
-  ui.setBg("assets/faces/sacha/happysacha.jpeg");
+  ui.setBg("assets/bg/party.png");
   ui.confetti(true);
   ui.clearActors();
   setMood(Mood.HAPPY);
