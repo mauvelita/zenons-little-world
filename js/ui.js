@@ -1,9 +1,6 @@
-import { state, moodEmoji, sachaFace, zenonFace, canFinale } from "./state.js";
-import { sfx } from "./audio.js";
-
 const $ = (id) => document.getElementById(id);
 
-export const ui = {
+const ui = {
   el: {
     hud: $("hud"),
     batteryFill: $("battery-fill"),
@@ -82,6 +79,9 @@ export const ui = {
     face.className = "face";
     face.alt = who;
     face.src = who === "sacha" ? (opts.face || sachaFace()) : (opts.face || zenonFace());
+    face.onerror = () => {
+      face.style.background = who === "sacha" ? "#c9a48a" : "#8a9bb0";
+    };
     const body = document.createElement("div");
     body.className = "body";
     const legs = document.createElement("div");

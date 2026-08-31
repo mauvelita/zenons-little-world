@@ -1,24 +1,11 @@
-import {
-  state,
-  getNickname,
-  addBattery,
-  setMood,
-  Mood,
-  canFinale,
-  resetRun,
-  moodEmoji,
-} from "./state.js";
-import { ui } from "./ui.js";
-import { sfx } from "./audio.js";
-
 function nick() {
   return getNickname();
 }
 
-export async function enterHub({ first = false } = {}) {
+async function enterHub({ first = false } = {}) {
   state.scene = "hub";
   if (first) setMood(Mood.OK);
-  ui.setBg("assets/bg/hub.png");
+  ui.setBg("assets/shrine/sacha-sofa.jpg");
   ui.clearActors();
   ui.confetti(!!first);
   if (!first) ui.confetti(false);
@@ -62,7 +49,7 @@ async function maybeOfferFinale() {
   if (go === "yes") await runFinale();
 }
 
-export async function onKiss() {
+async function onKiss() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   ui.popEmoji("❤️", 55, 35);
@@ -82,7 +69,7 @@ export async function onKiss() {
   maybeOfferFinale();
 }
 
-export async function onFeedCat() {
+async function onFeedCat() {
   sfx.click();
   state.flags.fedCat = true;
   if (state.scene === "hub" && !state.challenges.service) {
@@ -166,7 +153,7 @@ function checkServiceComplete() {
   }
 }
 
-export async function onChomp() {
+async function onChomp() {
   const target = await ui.openModal({
     title: "Chomp where?",
     bodyHtml: ``,
@@ -200,7 +187,7 @@ export async function onChomp() {
   maybeOfferFinale();
 }
 
-export async function openChallenges() {
+async function openChallenges() {
   const c = state.challenges;
   const pick = await ui.openModal({
     title: "Pick a setting",
@@ -259,18 +246,12 @@ async function runCoffee() {
     sfx.splash();
     ui.flashFx("splash", "☕");
     setMood(Mood.MAD);
-    addBattery(5); // still charges a little; fail is funny not punishing progress forever
+    addBattery(5);
     ui.refreshHud();
     const z = document.querySelector(".chibi.zenon");
     if (z) z.classList.add("drenched");
     ui.updateFaces();
     ui.popEmoji("☕", 62, 38);
-    setMood(Mood.MAD);
-    addBattery(5); // still charges a little; fail is funny not punishing progress forever
-    ui.refreshHud();
-    const z = document.querySelector(".chibi.zenon");
-    if (z) z.classList.add("drenched");
-    ui.updateFaces();
     await ui.say([
       { speaker: "Sacha", text: "This is a crime." },
       { speaker: "Zenon", text: "*drenched* …I'm weirdly happy though." },
@@ -381,7 +362,7 @@ async function runWorship() {
   state.scene = "worship";
   setMood(Mood.OK);
   ui.showDock(false);
-  ui.setBg("assets/bg/hub.png");
+  ui.setBg("assets/shrine/sacha-sofa.jpg");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "😈" });
   ui.makeChibi("zenon");
@@ -425,12 +406,12 @@ async function runWorship() {
   await enterHub();
 }
 
-export async function runFinale() {
+async function runFinale() {
   state.scene = "bedroom";
   setMood(Mood.HAPPY);
   ui.showDock(false);
   ui.confetti(true);
-  ui.setBg("assets/bg/bedroom.png");
+  ui.setBg("assets/shrine/sacha-cozy.jpg");
   ui.clearActors();
   ui.makeChibi("sacha", { emoji: "❤️" });
   ui.makeChibi("zenon");

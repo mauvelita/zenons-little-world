@@ -9,7 +9,7 @@ function ac() {
   return ctx;
 }
 
-export function startBgm() {
+function startBgm() {
   if (!bgmAudio) {
     bgmAudio = new Audio("assets/audio/song.mp3");
     bgmAudio.loop = true;
@@ -21,7 +21,7 @@ export function startBgm() {
   if (play && play.catch) play.catch(() => {});
 }
 
-export async function unlockAudio() {
+async function unlockAudio() {
   unlocked = true;
   startBgm();
   const c = ac();
@@ -67,7 +67,7 @@ function noiseBurst(dur = 0.08, gain = 0.05) {
   src.start();
 }
 
-export const sfx = {
+const sfx = {
   click() { tone(520, 0.05, "square", 0.04); },
   kiss() {
     tone(420, 0.08, "sine", 0.07, 180);
@@ -100,7 +100,7 @@ export const sfx = {
   },
 };
 
-export function stopBgm() {
+function stopBgm() {
   if (!bgmAudio) return;
   bgmAudio.pause();
 }

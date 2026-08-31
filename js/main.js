@@ -1,14 +1,3 @@
-import { state, saveNickname, getNickname, setMood, Mood } from "./state.js";
-import { unlockAudio, sfx } from "./audio.js";
-import { ui } from "./ui.js";
-import {
-  enterHub,
-  onKiss,
-  onFeedCat,
-  onChomp,
-  openChallenges,
-} from "./scenes.js";
-
 async function boot() {
   const fit = () => {
     const raw = window.visualViewport?.height || window.innerHeight || 800;
@@ -28,7 +17,7 @@ async function boot() {
 
   ui.showHud(false);
   ui.showDock(false);
-  ui.setBg("assets/bg/party.png");
+  ui.setBg("assets/faces/sacha/happysacha.jpeg");
   ui.confetti(true);
   ui.clearActors();
   setMood(Mood.HAPPY);
