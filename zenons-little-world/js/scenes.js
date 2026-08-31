@@ -97,7 +97,7 @@ export async function onKiss() {
   }
   await ui.say([
     { speaker: "Sacha", text: "Good boy." },
-    { speaker: "Zenon", text: "I— yes. Battery… charging. Brain… gone." },
+    { speaker: "Zenon", text: "hehe" },
   ]);
   maybeOfferFinale();
 }
@@ -189,7 +189,7 @@ function checkServiceComplete() {
 export async function onChomp() {
   const target = await ui.openModal({
     title: "Chomp where?",
-    bodyHtml: `<p class="hint">I'll eat you. / Eat me.</p>`,
+    bodyHtml: ``,
     actions: [
       { label: "Arm", value: "arm", primary: true },
       { label: "Face", value: "face" },
@@ -224,14 +224,12 @@ export async function openChallenges() {
   const c = state.challenges;
   const pick = await ui.openModal({
     title: "Pick a setting",
-    bodyHtml: `<div class="challenge-list">
-      <p class="hint">Three challenges. Funny fails only. Battery only goes up.</p>
-    </div>`,
+    bodyHtml: ``,
     actions: [
-      { label: c.coffee ? "☕ Office — Coffee ✓" : "☕ Office — Make coffee", value: "coffee", primary: !c.coffee, className: c.coffee ? "done" : "" },
-      { label: c.service ? "💎 Make offerings ✓" : "💎 Make offerings", value: "service", className: c.service ? "done" : "" },
-      { label: c.worship ? "🛐 Worship Scene ✓" : "🛐 Worship Scene", value: "worship", className: c.worship ? "done" : "" },
-      { label: canFinale() ? "🛏️ Bedroom — Final kiss" : "🛏️ Bedroom (locked)", value: "bedroom", disabled: !canFinale() },
+      { label: c.coffee ? "Office — Make coffee ✓" : "Office — Make coffee", value: "coffee", primary: !c.coffee, className: c.coffee ? "done" : "" },
+      { label: c.service ? "Make offerings ✓" : "Make offerings", value: "service", className: c.service ? "done" : "" },
+      { label: c.worship ? "Sanctuary ✓" : "Sanctuary", value: "worship", className: c.worship ? "done" : "" },
+      { label: canFinale() ? "Bedroom — Final kiss" : "Bedroom (locked)", value: "bedroom", disabled: !canFinale() },
       { label: "Back", value: "back" },
     ],
   });
