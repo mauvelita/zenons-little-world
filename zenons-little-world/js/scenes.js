@@ -32,7 +32,7 @@ export async function enterHub({ first = false } = {}) {
   ui.addProp("shrine", "assets/shrine/shrine-poster.jpg", () => onShrine());
   ui.addProp("spidey", "assets/props/spidey-poster.png", () => onSpidey());
   ui.addProp("cup", "assets/props/iced-capp.png", () => onCappProp());
-  ui.addProp("crown", "assets/props/crown.png", () => onCrown());
+  ui.addProp("halo", "assets/props/crown.png", () => onHalo());
   ui.addCat(() => onFeedCat());
 
   ui.makeChibi("sacha", { emoji: moodEmoji() });
@@ -142,11 +142,11 @@ async function onCappProp() {
   checkServiceComplete();
 }
 
-async function onCrown() {
+async function onHalo() {
   sfx.reveal();
   await ui.say([
     { speaker: "Sacha", text: "My angel. Put it on." },
-    { speaker: "Zenon", text: "*puts the crown on wrong* You make me so nervous. Stop looking at me." },
+    { speaker: "Zenon", text: "*puts the halo on wrong* You make me so nervous. Stop looking at me." },
   ]);
 }
 

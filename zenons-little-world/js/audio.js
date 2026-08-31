@@ -2,23 +2,22 @@
 
 let ctx;
 let unlocked = false;
+let bgmAudio = null;
 
 function ac() {
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
   return ctx;
 }
 
-function bgmEl() {
-  return document.getElementById("bgm");
-}
-
 export function startBgm() {
-  const audio = bgmEl();
-  if (!audio) return;
-  audio.loop = true;
-  audio.muted = false;
-  audio.volume = 0.5;
-  const play = audio.play();
+  if (!bgmAudio) {
+    bgmAudio = new Audio("assets/audio/song.mp3");
+    bgmAudio.loop = true;
+    bgmAudio.preload = "none";
+    bgmAudio.volume = 0.5;
+  }
+  bgmAudio.muted = false;
+  const play = bgmAudio.play();
   if (play && play.catch) play.catch(() => {});
 }
 
@@ -102,7 +101,6 @@ export const sfx = {
 };
 
 export function stopBgm() {
-  const audio = bgmEl();
-  if (!audio) return;
-  audio.pause();
+  if (!bgmAudio) return;
+  bgmAudio.pause();
 }
