@@ -162,6 +162,7 @@ export const ui = {
    * returns Promise resolving to choice value or null
    */
   busy: false,
+  actionLock: false,
 
   say(lines, choices = null) {
     return new Promise((resolve) => {

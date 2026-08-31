@@ -37,18 +37,20 @@ async function boot() {
   // dock bindings
   ui.el.dock.addEventListener("click", async (e) => {
     const btn = e.target.closest("button[data-action]");
-    if (!btn || ui.busy) return;
+    if (!btn || ui.busy || ui.actionLock) return;
     sfx.click();
     const action = btn.dataset.action;
     if (state.scene !== "hub" && action !== "challenges") return;
-    ui.busy = true;
+    ui.actionLock = true;
+    ui.el.dock.style.pointerEvents = "none";
     try {
       if (action === "kiss") await onKiss();
       else if (action === "feed") await onFeedCat();
       else if (action === "chomp") await onChomp();
       else if (action === "challenges") await openChallenges();
     } finally {
-      ui.busy = false;
+      ui.actionLock = false;
+      ui.el.dock.style.pointerEvents = "";
     }
   });
 

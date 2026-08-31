@@ -124,6 +124,7 @@ export async function onFeedCat() {
 async function onShrine() {
   sfx.kiss();
   state.flags.shrineKissed = true;
+  state.serviceSteps.pearl = true;
   addBattery(5);
   setMood(Mood.FREAKY);
   ui.refreshHud();
@@ -131,13 +132,14 @@ async function onShrine() {
   await ui.openModal({
     title: "Sacha Shrine",
     bodyHtml: `<img class="shrine-view" src="assets/shrine/shrine-poster.jpg" alt="I love Sacha shrine" />
-      <p class="hint">Zenon presses a kiss to the poster. Cheesy. Perfect.</p>`,
+      <p class="hint">He kneels. Leaves a pearl on the shrine like a sacrifice. Then he kisses the poster like it might kiss him back.</p>`,
     actions: [{ label: "I ❤️ Sacha", value: "ok", primary: true }],
   });
   await ui.say([
-    { speaker: "Zenon", text: "I love Sacha. I love Sacha. I love—" },
-    { speaker: "Sacha", text: "Obsessed. Correct." },
+    { speaker: "Zenon", text: "A pearl. My mouth. The poster. Take it. Take me." },
+    { speaker: "Sacha", text: "The shrine keeps what you give it. Including you." },
   ]);
+  checkServiceComplete();
   maybeOfferFinale();
 }
 
@@ -179,8 +181,8 @@ function checkServiceComplete() {
     ui.refreshHud();
     sfx.happy();
     ui.say([
-      { speaker: "Sacha", text: "Acts of service: complete. Golden retriever CEO unlocked." },
-      { speaker: "Zenon", text: "Please rate me five stars. Or bite me. Either works." },
+      { speaker: "Sacha", text: "Offerings accepted. The shrine is fed. Don't stop." },
+      { speaker: "Zenon", text: "I'll bring more. I'll bring everything." },
     ]);
   }
 }
@@ -199,11 +201,10 @@ export async function onChomp() {
   });
   if (target === "cancel") return;
 
-  const whoFirst = Math.random() > 0.5 ? "Zenon" : "Sacha";
-  const whoSecond = whoFirst === "Zenon" ? "Sacha" : "Zenon";
+  // Player is Zenon — he chomps. Sacha is the one who gets bitten and comments.
   await ui.say([
-    { speaker: whoFirst, text: "I'll eat you!" },
-    { speaker: whoSecond, text: "Eat me!" },
+    { speaker: "Zenon", text: "I'll eat you!" },
+    { speaker: "Sacha", text: "Eat me!" },
   ]);
   sfx.chomp();
   ui.flashFx("", "🦷");
@@ -213,8 +214,8 @@ export async function onChomp() {
   ui.refreshHud();
   ui.updateFaces();
   await ui.say([
-    { speaker: whoFirst === "Zenon" ? "Sacha" : "Zenon", text: "ow:(" },
-    { speaker: whoFirst, text: `*chomps ${target} like a dog on a bone*` },
+    { speaker: "Sacha", text: "ow:(" },
+    { speaker: "Zenon", text: `*chomps ${target} like a dog on a bone*` },
     { speaker: "Sacha", text: "Disgusting. Do it again." },
   ]);
   maybeOfferFinale();
@@ -229,7 +230,7 @@ export async function openChallenges() {
     </div>`,
     actions: [
       { label: c.coffee ? "☕ Office — Coffee ✓" : "☕ Office — Make coffee", value: "coffee", primary: !c.coffee, className: c.coffee ? "done" : "" },
-      { label: c.service ? "🌿 Acts of Service ✓" : "🌿 Acts of Service", value: "service", className: c.service ? "done" : "" },
+      { label: c.service ? "💎 Make offerings ✓" : "💎 Make offerings", value: "service", className: c.service ? "done" : "" },
       { label: c.worship ? "🛐 Worship Scene ✓" : "🛐 Worship Scene", value: "worship", className: c.worship ? "done" : "" },
       { label: canFinale() ? "🛏️ Bedroom — Final kiss" : "🛏️ Bedroom (locked)", value: "bedroom", disabled: !canFinale() },
       { label: "Back", value: "back" },
@@ -306,7 +307,7 @@ async function punishRewardScene() {
   setMood(Mood.ANNOYED);
   ui.updateFaces();
   await ui.say([
-    { speaker: "Zenon", text: "Please. Mercy. I'll do better. I'll invent better. I'll—" },
+    { speaker: "Zenon", text: "Please. Mercy. I'll do better. I'll—" },
     { speaker: "Sacha", text: "Quiet." },
   ]);
   sfx.slap();
@@ -321,8 +322,8 @@ async function punishRewardScene() {
   if (z) z.classList.remove("kneel", "timeout", "drenched");
   ui.updateFaces();
   await ui.say([
-    { speaker: "Sacha", text: "Slap. Then kiss. Learn the rhythm." },
-    { speaker: "Zenon", text: "Battery critical… in a good way." },
+    { speaker: "Sacha", text: "I slap you. Then I kiss you." },
+    { speaker: "Zenon", text: "Again." },
   ]);
 }
 
@@ -340,8 +341,8 @@ async function rewardScene() {
 async function runService() {
   ui.showDock(false);
   await ui.say([
-    { speaker: "Sacha", text: "Acts of Service checklist, angel:" },
-    { speaker: "Sacha", text: "1) Feed the cat  2) Touch the iced capp  3) Offer a pearl at the shrine." },
+    { speaker: "Sacha", text: "Make offerings. For me." },
+    { speaker: "Sacha", text: "1) Feed the cat  2) Touch the iced capp  3) A pearl at my shrine." },
   ]);
 
   // pearl offering happens here as dedicated step
@@ -427,7 +428,7 @@ async function runWorship() {
     setMood(Mood.FREAKY);
     ui.updateFaces();
     await ui.say([
-      { speaker: "Sacha", text: "On your knees. Use your words. Fail cutely." },
+      { speaker: "Sacha", text: "On your knees. Use your words." },
       { speaker: "Zenon", text: "I— you— goddess— wait what was the question—" },
     ]);
     await punishRewardScene();
@@ -455,8 +456,8 @@ export async function runFinale() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   await ui.say([
-    { speaker: "Zenon", text: "I would cease to be without you. Theatrical. True." },
-    { speaker: "Sacha", text: "I know. Now come here." },
+    { speaker: "Zenon", text: "If you left I'd still be here kissing that poster. I'm not well. I'm yours." },
+    { speaker: "Sacha", text: "Good. Stay sick. Come here." },
   ]);
 
   await ui.openModal({

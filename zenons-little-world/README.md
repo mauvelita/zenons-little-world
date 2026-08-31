@@ -4,7 +4,11 @@ A short mobile-friendly birthday simulation gift for **Zenon**.
 
 Static site — vanilla HTML / CSS / JS. No backend.
 
-## Play locally
+## Play
+
+Live: [https://mauvelita.github.io/zenons-little-world/](https://mauvelita.github.io/zenons-little-world/)
+
+Local:
 
 ```bash
 cd zenons-little-world
@@ -15,15 +19,15 @@ Open `http://localhost:8080`.
 
 ## Deploy (GitHub Pages)
 
-1. Create a new repo under `mauvelita` (e.g. `zenons-little-world`).
-2. Push this folder to `main`.
-3. Settings → Pages → Deploy from branch `main` / root (or `/docs` if you prefer).
+1. Push to `main`.
+2. Settings → Pages → **Source: GitHub Actions**.
+3. Play at [https://mauvelita.github.io/zenons-little-world/](https://mauvelita.github.io/zenons-little-world/).
 
 ## Controls
 
 - Enter a nickname for Zenon (saved in `localStorage`).
 - Hub actions: Kiss, Feed cat, Chomp, Go (challenges).
-- Challenges: Coffee (office), Acts of Service, Worship Scene.
+- Challenges: Coffee (office), Make offerings, Worship Scene.
 - Fill Battery to 100% with Sacha not annoyed → Bedroom finale.
 
 ## Assets
