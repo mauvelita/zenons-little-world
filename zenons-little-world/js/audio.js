@@ -1,11 +1,11 @@
-/** Cartoon SFX via Web Audio. BGM is `assets/audio/track.mp3`. */
+/** Cartoon SFX via Web Audio. BGM is `assets/audio/song.mp3`. */
 
 let ctx;
 let unlocked = false;
 let bgmAudio = null;
 let bgmOn = false;
 
-const TRACK_URL = new URL("../assets/audio/track.mp3", import.meta.url).href;
+const TRACK_URL = new URL("../assets/audio/song.mp3", import.meta.url).href;
 
 function ac() {
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -91,7 +91,7 @@ export const sfx = {
   },
 };
 
-/** Loop `assets/audio/track.mp3` after the first tap. */
+/** Loop `assets/audio/song.mp3` after the first tap. */
 export function startBgm() {
   if (bgmAudio) {
     if (bgmAudio.paused) bgmAudio.play().catch(() => {});
