@@ -6,6 +6,7 @@ const $ = (id) => document.getElementById(id);
 export const ui = {
   el: {
     hud: $("hud"),
+    phone: $("phone"),
     batteryFill: $("battery-fill"),
     batteryPct: $("battery-pct"),
     moodEmoji: $("mood-emoji"),
@@ -154,6 +155,8 @@ export const ui = {
   hideDialogue() {
     this.el.dialogue.classList.add("hidden");
     this.el.choices.innerHTML = "";
+    this.el.phone?.classList.remove("dialogue-open");
+    this.el.phone?.style.removeProperty("--dialogue-space");
   },
 
   /**
@@ -169,6 +172,11 @@ export const ui = {
       this.busy = true;
       this.el.dock.style.pointerEvents = "none";
       this.el.dialogue.classList.remove("hidden");
+      this.el.phone?.classList.add("dialogue-open");
+      requestAnimationFrame(() => {
+        const h = this.el.dialogue.offsetHeight;
+        this.el.phone?.style.setProperty("--dialogue-space", `${h + 12}px`);
+      });
       let i = 0;
       const finish = (value) => {
         this.hideDialogue();
