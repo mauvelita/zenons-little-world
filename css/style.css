@@ -22,8 +22,10 @@
 * { box-sizing: border-box; }
 html, body {
   margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
   height: 100%;
-  height: var(--app-h);
+  height: var(--app-h, 100svh);
   background: radial-gradient(ellipse at top, #1c2e24, #070b09 70%);
   color: var(--ink);
   font-family: var(--font-ui);
@@ -34,8 +36,9 @@ html, body {
 }
 
 #app {
-  height: var(--app-h);
-  min-height: var(--app-h);
+  min-height: 100vh;
+  min-height: 100svh;
+  height: var(--app-h, 100svh);
   display: grid;
   place-items: center;
   padding: 8px;
@@ -44,7 +47,8 @@ html, body {
 .phone {
   width: var(--phone-w);
   height: var(--phone-h);
-  max-height: var(--app-h);
+  min-height: 480px;
+  max-height: none;
   background: var(--bg);
   border: 3px solid #2a3d32;
   border-radius: 28px;

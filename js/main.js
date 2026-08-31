@@ -11,8 +11,9 @@ import {
 
 async function boot() {
   const fit = () => {
-    const h = window.visualViewport?.height ?? window.innerHeight;
-    document.documentElement.style.setProperty("--app-h", `${Math.round(h)}px`);
+    const raw = window.visualViewport?.height || window.innerHeight || 800;
+    const h = Math.max(320, Math.round(raw));
+    document.documentElement.style.setProperty("--app-h", `${h}px`);
   };
   fit();
   window.visualViewport?.addEventListener("resize", fit);
