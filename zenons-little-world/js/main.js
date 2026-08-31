@@ -11,6 +11,15 @@ import {
 } from "./scenes.js";
 
 async function boot() {
+  const fit = () => {
+    const h = window.visualViewport?.height ?? window.innerHeight;
+    document.documentElement.style.setProperty("--app-h", `${Math.round(h)}px`);
+  };
+  fit();
+  window.visualViewport?.addEventListener("resize", fit);
+  window.visualViewport?.addEventListener("scroll", fit);
+  window.addEventListener("orientationchange", () => setTimeout(fit, 250));
+
   // first gesture unlocks audio
   const unlockOnce = async () => {
     await unlockAudio();
@@ -26,8 +35,8 @@ async function boot() {
   ui.makeChibi("sacha", { face: "assets/faces/sacha/happy-circle.png", emoji: "🎂" });
 
   await ui.say([
-    { speaker: "System", text: "Zenon's Little World" },
-    { speaker: "System", text: "A tiny birthday simulation. Tap to continue." },
+    { speaker: "Player", text: "Zenon's Little World" },
+    { speaker: "Player", text: "A tiny birthday simulation. Tap to continue." },
   ]);
 
   const name = await ui.askName();

@@ -132,12 +132,11 @@ async function onShrine() {
   await ui.openModal({
     title: "Sacha Shrine",
     bodyHtml: `<img class="shrine-view" src="assets/shrine/shrine-poster.jpg" alt="I love Sacha shrine" />
-      <p class="hint">He kneels. Leaves a pearl on the shrine like a sacrifice. Then he kisses the poster like it might kiss him back.</p>`,
+      <p class="hint">He kneels. Leaves a pearl. Then he makes out with the poster like Sacha wasn't just… right there.</p>`,
     actions: [{ label: "I ❤️ Sacha", value: "ok", primary: true }],
   });
   await ui.say([
-    { speaker: "Zenon", text: "A pearl. My mouth. The poster. Take it. Take me." },
-    { speaker: "Sacha", text: "The shrine keeps what you give it. Including you." },
+    { speaker: "Sacha", text: "Relax. I only said offer a pearl." },
   ]);
   checkServiceComplete();
   maybeOfferFinale();
@@ -258,7 +257,7 @@ async function runCoffee() {
   ]);
 
   const choice = await ui.say(
-    [{ speaker: "System", text: "How does Zenon brew?" }],
+    [{ speaker: "Player", text: "How does Zenon brew?" }],
     [
       { label: "Careful, devoted, tasting every step", value: "good", primary: true },
       { label: "Nervous chaos — too much of everything", value: "bad" },
@@ -347,7 +346,7 @@ async function runService() {
 
   // pearl offering happens here as dedicated step
   const doPearl = await ui.say(
-    [{ speaker: "System", text: "Place a pearl offering?" }],
+    [{ speaker: "Player", text: "Place a pearl offering?" }],
     [
       { label: "Offer pearl + lily at shrine", value: "yes", primary: true },
       { label: "Half-ass it and hope", value: "no" },
