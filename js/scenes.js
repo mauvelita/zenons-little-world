@@ -237,7 +237,7 @@ async function runCoffee() {
     ui.updateFaces();
     document.querySelector(".chibi.zenon")?.classList.add("bounce");
     await ui.say([
-      { speaker: "Sacha", text: "…Acceptable. I'm happy. You're glowing." },
+      { speaker: "Sacha", text: "Oh? Not bad. Don't let it go to your head." },
       { speaker: "Zenon", text: "*blushes so hard he almost levitates*" },
     ]);
     await rewardScene();
@@ -423,7 +423,7 @@ async function runFinale() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   await ui.say([
-    { speaker: "Zenon", text: "If you left I'd still be here kissing that poster. I wanna die. It's too much. I'm yours." },
+    { speaker: "Zenon", text: "If you left I would be kissing the poster. You're so sexy!!!!" },
     { speaker: "Sacha", text: "Good. Stay sick. Come here." },
   ]);
 
