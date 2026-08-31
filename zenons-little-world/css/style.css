@@ -108,7 +108,7 @@ html, body {
 .stage {
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-height: 0;
 }
 .bg {
@@ -119,6 +119,7 @@ html, body {
   background-size: cover;
   background-repeat: no-repeat;
   image-rendering: auto;
+  overflow: hidden;
 }
 .bg::after {
   content: "";
@@ -165,28 +166,31 @@ html, body {
 .chibi {
   position: relative;
   width: 118px;
-  height: 150px;
-  transition: transform .25s ease, filter .25s ease;
+  height: 156px;
+  flex-shrink: 0;
+  overflow: visible;
 }
 .chibi.bounce { animation: bounce 0.7s ease infinite; }
 .chibi.timeout {
-  transform: translateX(-70px) scale(.92);
+  transform: translateX(-24px) scale(.94);
+  transform-origin: center bottom;
   filter: grayscale(.35) brightness(.85);
 }
-.chibi.kneel .body { transform: translateY(28px) scaleY(.7); }
-.chibi.drenched .body { filter: hue-rotate(160deg) saturate(1.4); }
+.chibi.drenched { filter: hue-rotate(160deg) saturate(1.4); }
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  50% { transform: translateY(-10px); }
 }
 
 .chibi .body {
   position: absolute;
+  z-index: 1;
   left: 50%;
   bottom: 0;
   width: 72px;
-  height: 88px;
+  height: 84px;
   transform: translateX(-50%);
+  transform-origin: center bottom;
   background: #2a2e38;
   border: 3px solid #12141a;
   border-radius: 18px 18px 10px 10px;
@@ -214,15 +218,17 @@ html, body {
 }
 .chibi .face {
   position: absolute;
+  z-index: 2;
   left: 50%;
   top: 0;
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   transform: translateX(-50%);
   border-radius: 50%;
   border: 3px solid #f2ebe3;
   box-shadow: 0 0 0 2px #2a3d32;
   object-fit: cover;
+  object-position: center 20%;
   background: #c9b8a6;
   image-rendering: auto;
 }
@@ -240,19 +246,21 @@ html, body {
 
 .cat-sprite {
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
   image-rendering: pixelated;
-  bottom: 14%;
-  left: 8%;
-  z-index: 3;
+  bottom: 26%;
+  left: 3%;
+  z-index: 8;
   pointer-events: auto;
   cursor: pointer;
+  filter: drop-shadow(0 3px 0 #0a120e) drop-shadow(0 8px 10px rgba(0,0,0,.45));
 }
 .prop {
   position: absolute;
   image-rendering: pixelated;
-  z-index: 3;
+  z-index: 8;
   cursor: pointer;
   pointer-events: auto;
 }
@@ -442,8 +450,9 @@ html, body {
 .end-card p { line-height: 1.4; }
 
 @media (max-height: 700px) {
-  .chibi { width: 100px; height: 130px; }
-  .chibi .face { width: 54px; height: 54px; }
+  .chibi { width: 100px; height: 136px; }
+  .chibi .face { width: 64px; height: 64px; }
+  .chibi .body { width: 60px; height: 72px; }
   .bubble-wrap { min-height: 72px; padding: 10px; }
 }
 
@@ -462,16 +471,16 @@ html, body {
     box-shadow: none;
   }
   .chibi {
-    width: min(38vw, 150px);
-    height: min(48vw, 190px);
+    width: min(34vw, 130px);
+    height: min(44vw, 168px);
   }
   .chibi .face {
-    width: min(22vw, 84px);
-    height: min(22vw, 84px);
+    width: min(20vw, 78px);
+    height: min(20vw, 78px);
   }
   .chibi .body {
-    width: min(24vw, 88px);
-    height: min(28vw, 108px);
+    width: min(22vw, 76px);
+    height: min(24vw, 90px);
   }
   .bubble-wrap { min-height: 0; }
 }

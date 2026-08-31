@@ -88,8 +88,8 @@ export const ui = {
     legs.className = "legs";
     legs.innerHTML = "<i></i><i></i>";
     body.appendChild(legs);
-    div.appendChild(face);
     div.appendChild(body);
+    div.appendChild(face);
     if (opts.emoji) {
       const e = document.createElement("span");
       e.className = "emoji-tag";

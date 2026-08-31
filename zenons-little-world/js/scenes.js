@@ -302,7 +302,7 @@ async function runCoffee() {
 async function punishRewardScene() {
   ui.showDock(false);
   const z = document.querySelector(".chibi.zenon");
-  if (z) z.classList.add("kneel", "timeout");
+  if (z) z.classList.add("timeout");
   setMood(Mood.MAD);
   ui.updateFaces();
   await ui.say([
@@ -318,7 +318,7 @@ async function punishRewardScene() {
   setMood(Mood.HAPPY);
   addBattery(10);
   ui.refreshHud();
-  if (z) z.classList.remove("kneel", "timeout", "drenched");
+  if (z) z.classList.remove("timeout", "drenched");
   ui.updateFaces();
   await ui.say([
     { speaker: "Sacha", text: "I slap you. Then I kiss you." },
@@ -463,15 +463,13 @@ export async function runFinale() {
   ]);
 
   await ui.openModal({
-    title: "Zenon's Little World",
+    title: "Happy birthday",
     bodyHtml: `<div class="end-card">
-      <p>A birthday garden for Zenon.</p>
-      <p class="hint">Made with pearls, lilies, iced capps, and too many bite marks.</p>
-      <p>Happy birthday. Welcome home, surfboard.</p>
+      <p>Happy birthday, ${nick()}.</p>
     </div>`,
     actions: [
       { label: "Play again", value: "replay", primary: true },
-      { label: "Stay in the afterglow", value: "stay" },
+      { label: "Stay", value: "stay" },
     ],
   }).then(async (v) => {
     ui.confetti(false);

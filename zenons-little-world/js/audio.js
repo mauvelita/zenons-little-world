@@ -2,14 +2,24 @@
 
 let ctx;
 let unlocked = false;
-let bgmAudio = null;
-let bgmOn = false;
-
-const TRACK_URL = new URL("../assets/audio/song.mp3", import.meta.url).href;
 
 function ac() {
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
   return ctx;
+}
+
+function bgmEl() {
+  return document.getElementById("bgm");
+}
+
+export function startBgm() {
+  const audio = bgmEl();
+  if (!audio) return;
+  audio.loop = true;
+  audio.muted = false;
+  audio.volume = 0.5;
+  const play = audio.play();
+  if (play && play.catch) play.catch(() => {});
 }
 
 export async function unlockAudio() {
@@ -91,29 +101,8 @@ export const sfx = {
   },
 };
 
-/** Loop `assets/audio/song.mp3` after the first tap. */
-export function startBgm() {
-  if (bgmAudio) {
-    if (bgmAudio.paused) bgmAudio.play().catch(() => {});
-    return;
-  }
-  const audio = new Audio(TRACK_URL);
-  audio.loop = true;
-  audio.volume = 0.45;
-  audio.preload = "auto";
-  bgmAudio = audio;
-  const tryPlay = () => {
-    audio.play()
-      .then(() => { bgmOn = true; })
-      .catch(() => {});
-  };
-  tryPlay();
-  audio.addEventListener("canplaythrough", tryPlay, { once: true });
-}
-
 export function stopBgm() {
-  if (!bgmAudio) return;
-  bgmAudio.pause();
-  bgmAudio = null;
-  bgmOn = false;
+  const audio = bgmEl();
+  if (!audio) return;
+  audio.pause();
 }

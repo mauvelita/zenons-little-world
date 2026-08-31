@@ -21,9 +21,10 @@ async function boot() {
   window.addEventListener("orientationchange", () => setTimeout(fit, 250));
 
   // first gesture unlocks audio
-  document.body.addEventListener("pointerdown", () => {
-    unlockAudio();
-  });
+  const kickAudio = () => unlockAudio();
+  document.addEventListener("pointerdown", kickAudio, { capture: true });
+  document.addEventListener("touchstart", kickAudio, { capture: true });
+  document.addEventListener("click", kickAudio, { capture: true });
 
   ui.showHud(false);
   ui.showDock(false);
