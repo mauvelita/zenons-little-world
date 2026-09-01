@@ -85,7 +85,7 @@ const ui = {
     const body = document.createElement("img");
     body.className = "body-sprite";
     body.alt = "";
-    body.src = who === "sacha" ? "assets/bodies/sacha.png?v=1" : "assets/bodies/zenon.png?v=1";
+    body.src = who === "sacha" ? "assets/bodies/sacha.png?v=2" : "assets/bodies/zenon.png?v=2";
     div.appendChild(body);
     div.appendChild(face);
     if (opts.emoji) {
@@ -95,7 +95,20 @@ const ui = {
       div.appendChild(e);
     }
     this.el.actors.appendChild(div);
+    if (who === "zenon" && state.flags.wearingHalo) this.wearHalo(div);
     return div;
+  },
+
+  wearHalo(zen) {
+    const el = zen || this.el.actors.querySelector(".chibi.zenon");
+    if (!el || el.querySelector(".halo-wear")) return;
+    document.querySelector(".prop.halo")?.remove();
+    const img = document.createElement("img");
+    img.className = "halo-wear";
+    img.src = "assets/props/halo-wear.png?v=1";
+    img.alt = "";
+    el.insertBefore(img, el.firstChild);
+    el.classList.add("halo-on");
   },
 
   updateFaces() {

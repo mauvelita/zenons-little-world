@@ -47,6 +47,7 @@ const state = {
     fedCat: false,
     shrineKissed: false,
     introDone: false,
+    wearingHalo: false,
   },
 };
 
@@ -81,7 +82,7 @@ function resetRun() {
   state.mood = Mood.OK;
   state.challenges = { coffee: false, service: false, worship: false };
   state.serviceSteps = { cat: false, coffee: false, pearl: false };
-  state.flags = { fedCat: false, shrineKissed: false, introDone: true };
+  state.flags = { fedCat: false, shrineKissed: false, introDone: true, wearingHalo: false };
   state.nickname = nick;
   state.scene = "hub";
 }
