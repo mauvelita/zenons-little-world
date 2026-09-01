@@ -161,7 +161,7 @@ html, body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-top: 88px;
+  padding-top: 64px;
   padding-bottom: 12px;
   gap: 16px;
   pointer-events: none;
@@ -169,12 +169,11 @@ html, body {
 
 .chibi {
   position: relative;
-  display: block;
+  width: 118px;
+  height: 156px;
   flex-shrink: 0;
   overflow: visible;
 }
-.chibi.sacha { width: 88px; height: 264px; }
-.chibi.zenon { width: 108px; height: 238px; }
 .chibi.bounce { animation: bounce 0.7s ease infinite; }
 .chibi.timeout {
   transform: translateX(-24px) scale(.94);
@@ -189,16 +188,17 @@ html, body {
     inset 0 -14px 18px rgba(62, 28, 8, 0.55),
     inset 0 8px 10px rgba(160, 100, 40, 0.2);
 }
-.chibi.drenched .body-sprite {
-  filter: sepia(0.55) saturate(1.4) brightness(0.72);
+.chibi.drenched .body {
+  background: linear-gradient(180deg, #5c3414 0%, #2a1a10 40%, #15130f 100%) !important;
+  box-shadow: inset 0 16px 14px rgba(80, 40, 12, 0.45);
 }
 .chibi.drenched::after {
   content: "";
   position: absolute;
   z-index: 3;
   left: 50%;
-  top: 2%;
-  width: 42%;
+  top: 0;
+  width: 62%;
   aspect-ratio: 1;
   transform: translateX(-50%);
   border-radius: 50%;
@@ -212,7 +212,7 @@ html, body {
   position: absolute;
   z-index: 4;
   left: 46%;
-  top: 22%;
+  top: 46%;
   width: 7px;
   height: 26px;
   border-radius: 8px;
@@ -234,65 +234,80 @@ html, body {
   50% { transform: translateY(-10px); }
 }
 
-.chibi .body-sprite {
+.chibi .body {
   position: absolute;
-  inset: 0;
   z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top center;
+  left: 50%;
+  bottom: 0;
+  width: 72px;
+  height: 84px;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+  background: #2a2e38;
+  border: 3px solid #12141a;
+  border-radius: 18px 18px 10px 10px;
   image-rendering: pixelated;
-  pointer-events: none;
+}
+.chibi.sacha .body {
+  background: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 40%, #111 40%, #1a1a1a 100%);
+}
+.chibi.zenon .body {
+  background: linear-gradient(180deg, #252830, #1a1c24);
+}
+.chibi .legs {
+  position: absolute;
+  bottom: -2px; left: 50%;
+  width: 54px; height: 28px;
+  transform: translateX(-50%);
+  display: flex; gap: 6px; justify-content: center;
+}
+.chibi .legs i {
+  width: 18px; height: 28px;
+  background: #15171c;
+  border: 2px solid #0a0b0e;
+  display: block;
 }
 .chibi .face {
   position: absolute;
   z-index: 2;
   left: 50%;
-  top: 2px;
-  margin: 0;
-  width: 62px;
-  height: 62px;
-  transform: translate(-50%, -58%);
+  top: 0;
+  width: 72px;
+  height: 72px;
+  transform: translateX(-50%);
   border-radius: 50%;
-  border: 2px solid #f2ebe3;
-  box-shadow: 0 0 0 1px #2a3d32;
+  border: 3px solid #f2ebe3;
+  box-shadow: 0 0 0 2px #2a3d32;
   object-fit: cover;
-  object-position: center 16%;
+  object-position: center 18%;
   background: #c9b8a6;
   image-rendering: auto;
 }
-.chibi.sacha .face { width: 64px; height: 64px; }
-.chibi.zenon .face { width: 60px; height: 60px; }
 .chibi .halo-wear {
   position: absolute;
   z-index: 0;
   left: 50%;
-  top: -40px;
-  width: 132px;
-  height: 120px;
+  top: -18px;
+  width: 96px;
+  height: 88px;
   transform: translateX(-50%);
   object-fit: contain;
-  object-position: center top;
+  object-position: top center;
   pointer-events: none;
   image-rendering: pixelated;
-  filter:
-    drop-shadow(0 0 1px #fff)
-    drop-shadow(0 2px 0 #0a100c)
-    drop-shadow(0 6px 8px rgba(0,0,0,.45));
 }
 .chibi.halo-on .halo-wear {
   animation: halo-settle .45s ease;
 }
 @keyframes halo-settle {
-  from { transform: translateX(-50%) translateY(-18px) scale(.86); opacity: 0; }
+  from { transform: translateX(-50%) translateY(-12px) scale(.9); opacity: 0; }
   to { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
 }
 .chibi .emoji-tag {
   position: absolute;
   z-index: 3;
-  top: -22%;
-  right: -8%;
+  top: -18px;
+  right: -4px;
   font-size: 22px;
   animation: pop .4s ease;
 }
@@ -512,11 +527,9 @@ html, body {
 .end-card p { line-height: 1.4; }
 
 @media (max-height: 700px) {
-  .chibi.sacha { width: 80px; height: 240px; }
-  .chibi.zenon { width: 98px; height: 216px; }
-  .chibi.sacha .face { width: 58px; height: 58px; }
-  .chibi.zenon .face { width: 54px; height: 54px; }
-  .chibi .halo-wear { width: 118px; height: 108px; top: -34px; }
+  .chibi { width: 100px; height: 136px; }
+  .chibi .face { width: 64px; height: 64px; }
+  .chibi .body { width: 60px; height: 72px; }
   .bubble-wrap { min-height: 72px; padding: 10px; }
 }
 
@@ -538,11 +551,9 @@ html, body {
     border-radius: 0;
     box-shadow: none;
   }
-  .chibi.sacha { width: 82px; height: 246px; }
-  .chibi.zenon { width: 100px; height: 220px; }
-  .chibi.sacha .face { width: 60px; height: 60px; }
-  .chibi.zenon .face { width: 56px; height: 56px; }
-  .chibi .halo-wear { width: 122px; height: 110px; top: -36px; }
+  .chibi { width: min(34vw, 130px); height: min(44vw, 168px); }
+  .chibi .face { width: min(20vw, 78px); height: min(20vw, 78px); }
+  .chibi .body { width: min(22vw, 76px); height: min(24vw, 90px); }
   .bubble-wrap { min-height: 0; }
   .cat-sprite {
     width: 58px;
