@@ -19,7 +19,7 @@ async function enterHub({ first = false } = {}) {
   ui.addProp("shrine", "assets/shrine/shrine-poster.jpg", () => onShrine());
   ui.addProp("spidey", "assets/props/spidey-poster.jpeg", () => onSpidey());
   ui.addProp("cup", "assets/props/iced-capp.png", () => onCappProp());
-  ui.addProp("halo", "assets/props/crown.jpeg", () => onHalo());
+  ui.addProp("halo", "assets/props/crown.png", () => onHalo());
   ui.addCat(() => onFeedCat());
 
   ui.makeChibi("sacha", { emoji: moodEmoji() });
