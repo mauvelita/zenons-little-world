@@ -430,7 +430,7 @@ async function runFinale() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   await ui.say([
-    { speaker: "Zenon", text: "I'd still be kissing the poster. Even from timeout. You're so sexy!!!" },
+    { speaker: "Zenon", text: "Put me in timeout. I can't handle this. You're so sexy!!!" },
     { speaker: "Sacha", text: "Come here." },
   ]);
 
