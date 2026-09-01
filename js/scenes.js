@@ -30,7 +30,7 @@ async function enterHub({ first = false } = {}) {
 
   if (first) {
     await ui.say([
-      { speaker: "Zenon", text: "She's… everywhere. Posters. Diamonds and pearls. Lilies. I'm going to combust." },
+      { speaker: "Zenon", text: "There's a shrine. There's you. I'm going to combust." },
       { speaker: "Sacha", text: `Battery up, ${nick()}. Kiss me. Serve me. Survive me.` },
     ]);
   }
