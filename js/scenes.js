@@ -338,7 +338,7 @@ async function runService() {
     document.querySelector(".chibi.zenon")?.classList.add("timeout");
     await ui.say([
       { speaker: "Sacha", text: "Timeout corner. Think about what you did." },
-      { speaker: "Zenon", text: "I deserve this. I also miss you from three meters away." },
+      { speaker: "Zenon", text: "I deserve this. Please don't—" },
     ]);
     await punishRewardScene();
     state.serviceSteps.pearl = true; // after punishment he does it properly
