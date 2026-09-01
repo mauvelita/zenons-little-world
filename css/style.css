@@ -302,8 +302,8 @@ html, body {
   height: 92px;
   object-fit: contain;
   image-rendering: pixelated;
-  bottom: 26%;
-  left: 3%;
+  bottom: 10%;
+  left: 2%;
   z-index: 8;
   pointer-events: auto;
   cursor: pointer;
@@ -317,7 +317,7 @@ html, body {
   pointer-events: auto;
 }
 .prop.spidey { width: 56px; top: 18%; right: 8%; }
-.prop.cup { width: 40px; bottom: 22%; right: 14%; }
+.prop.cup { width: 40px; bottom: 10%; right: 3%; }
 .prop.halo { width: 56px; top: 16%; left: 42%; }
 .prop.shrine {
   width: 110px;
@@ -544,4 +544,15 @@ html, body {
     height: min(24vw, 90px);
   }
   .bubble-wrap { min-height: 0; }
+  .cat-sprite {
+    width: 58px;
+    height: 58px;
+    left: 4px;
+    bottom: 6%;
+  }
+  .prop.cup {
+    width: 32px;
+    right: 4px;
+    bottom: 6%;
+  }
 }

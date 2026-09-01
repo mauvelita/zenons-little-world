@@ -127,7 +127,7 @@ const ui = {
   addCat(onClick) {
     const img = document.createElement("img");
     img.className = "cat-sprite";
-    img.src = "assets/props/cat.png";
+    img.src = "assets/props/cat.png?v=10";
     img.alt = "cat";
     if (onClick) img.addEventListener("click", () => onClick());
     document.getElementById("stage").appendChild(img);
