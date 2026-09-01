@@ -85,7 +85,7 @@ const ui = {
     const body = document.createElement("img");
     body.className = "body-sprite";
     body.alt = "";
-    body.src = who === "sacha" ? "assets/bodies/sacha.png?v=2" : "assets/bodies/zenon.png?v=2";
+    body.src = who === "sacha" ? "assets/bodies/sacha.png?v=3" : "assets/bodies/zenon.png?v=3";
     div.appendChild(body);
     div.appendChild(face);
     if (opts.emoji) {
