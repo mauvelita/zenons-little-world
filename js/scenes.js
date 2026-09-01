@@ -99,7 +99,7 @@ async function onShrine() {
   await ui.openModal({
     title: "Sacha Shrine",
     bodyHtml: `<img class="shrine-view" src="assets/shrine/shrine-poster.jpg" alt="I love Sacha shrine" />
-      <p class="hint">He kneels. After the offering, he makes out with the poster.</p>`,
+      <p class="hint">After the offering, he makes out with the poster.</p>`,
     actions: [{ label: "I ❤️ Sacha", value: "ok", primary: true }],
   });
   await ui.say([
