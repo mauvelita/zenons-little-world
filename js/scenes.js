@@ -430,8 +430,8 @@ async function runFinale() {
   sfx.kiss();
   ui.flashFx("hearts", "💋");
   await ui.say([
-    { speaker: "Zenon", text: "If you left I would be kissing the poster. You're so sexy!!!!" },
-    { speaker: "Sacha", text: "Good. Stay sick. Come here." },
+    { speaker: "Zenon", text: "I'd still be kissing the poster. Even from timeout. You're so sexy!!!" },
+    { speaker: "Sacha", text: "Come here." },
   ]);
 
   await ui.openModal({
