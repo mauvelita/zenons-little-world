@@ -82,12 +82,10 @@ const ui = {
     face.onerror = () => {
       face.style.background = who === "sacha" ? "#c9a48a" : "#8a9bb0";
     };
-    const body = document.createElement("div");
-    body.className = "body";
-    const legs = document.createElement("div");
-    legs.className = "legs";
-    legs.innerHTML = "<i></i><i></i>";
-    body.appendChild(legs);
+    const body = document.createElement("img");
+    body.className = "body-sprite";
+    body.alt = "";
+    body.src = who === "sacha" ? "assets/bodies/sacha.png?v=1" : "assets/bodies/zenon.png?v=1";
     div.appendChild(body);
     div.appendChild(face);
     if (opts.emoji) {
