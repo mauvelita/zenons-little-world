@@ -26,6 +26,7 @@ async function boot() {
   await ui.say([
     { speaker: "Sacha", text: "Come in. It's yours. Tap." },
   ]);
+  document.getElementById("game-title")?.classList.add("hidden");
 
   const name = await ui.askName();
   saveNickname(name);
